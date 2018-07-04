@@ -1,0 +1,9 @@
+<% provide(:title, "Posts") %>
+<div class="row">
+  <% if @posts.any? %>
+    <ol class="posts">
+      <%= render @posts %>
+    </ol>
+    <%= will_paginate @posts %>
+  <% end %>
+</div>

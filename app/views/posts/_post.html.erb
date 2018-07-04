@@ -9,7 +9,7 @@
     <% end %>
   </span>
   <span class="content">
-    <h3><%= post.title %></h4>
+    <h3><%= link_to post.title, post_path(post)%></h3>
     <p><%= post.content %></p>
     <%= image_tag post.picture.url if post.picture? %>
   </span>

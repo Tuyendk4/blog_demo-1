@@ -2,6 +2,17 @@ class PostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 
+  def index
+    @posts = Post.paginate(page: params[:page], per_page: 10)
+  end
+
+  def show
+    @post = Post.find_by(id: params[:id])
+    @comments = @post.comments.all
+    @comment = @post.comments.build(user_id: current_user.id) if logged_in?
+    @user = @post.user
+  end
+
   def create
     @post = current_user.posts.build(post_params)
     if @post.save

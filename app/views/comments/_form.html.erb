@@ -1,0 +1,12 @@
+<% if current_user?(@user) || current_user.following?(@user) %>
+  <%= form_for(@comment) do |f| %>
+    <%= render 'shared/error_messages', object: @comment %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <div class="field">
+      <%= f.label :user_name, current_user.name %>
+    </div>
+    <%= f.text_area :content, class: "form-group form-control" %>    
+    <%= f.submit "Create comment", class: "btn btn-primary" %>
+  <% end %> 
+<% end %>
