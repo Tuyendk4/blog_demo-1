@@ -1,0 +1,2 @@
+$("#comment_form").append("<%= escape_javascript(render('comments/comment', comment: @comment)) %>");
+$("#new_comment #comment_content").val('');

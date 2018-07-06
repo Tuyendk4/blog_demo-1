@@ -14,10 +14,13 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-    if @comment.save
-      redirect_to post_path(@comment.post_id), notice: 'Comment was successfully created.'
-    else
-      render 'new'
+    respond_to do |format|
+      if @comment.save
+        format.html {redirect_to post_path(@comment.post_id), notice: 'Comment was successfully created.'}
+        format.js
+      else
+        render 'new'
+      end
     end
   end
 
@@ -31,8 +34,9 @@ class CommentsController < ApplicationController
 
   def destroy
   	@post = @comment.post
-    if @comment.destroy
-      redirect_to post, notice: 'Comment was successfully destroyed.'
+    respond_to do |format|
+      format.html { redirect_to @post, notice: 'Comment was successfully destroyed.' }
+      format.js
     end
   end
 
